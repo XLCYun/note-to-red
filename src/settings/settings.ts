@@ -40,12 +40,13 @@ export const DEFAULT_SETTINGS: RedSettings = {
     customThemes: [],
     // 修改默认用户信息
     userAvatar: '',  // 默认为空，提示用户上传
-    userName: '夜半',
+    userName: '藏云',
     notesTitle: '备忘录',
-    userId: '@Yeban',
+    userId: '@XLCYun',
     showTime: true,
     timeFormat: 'zh-CN',
     headingLevel: 'h2', // 默认使用二级标题
+    showFooter: false,
     footerLeftText: '夜半过后，光明便启程',
     footerRightText: '欢迎关注公众号：夜半',
     customFonts: [
@@ -100,14 +101,16 @@ export class SettingsManager extends EventEmitter {
             savedData = {};
         }
     
-        // 如果是首次加载或 themes 为空，导入预设主题
-        if (!savedData.themes || savedData.themes.length === 0) {
-            const { templates } = await import('../templates');
-            savedData.themes = Object.values(templates).map(theme => ({
+        const { templates } = await import('../templates');
+        const savedPresetThemes: Theme[] = Array.isArray(savedData.themes) ? savedData.themes : [];
+        savedData.themes = Object.values(templates).map((theme: Theme) => {
+            const savedTheme = savedPresetThemes.find(({ id }) => id === theme.id);
+            return {
                 ...theme,
-                isPreset: true
-            }));
-        }
+                isPreset: true,
+                isVisible: savedTheme?.isVisible ?? true
+            };
+        });
     
         // 确保 customThemes 存在
         if (!savedData.customThemes) {

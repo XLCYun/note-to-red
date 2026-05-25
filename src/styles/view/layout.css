@@ -1,3 +1,7 @@
+:root {
+    --red-note-aspect-ratio: 3/5;
+}
+
 /* 预览区域 */
 .red-preview-wrapper {
     padding: 10px 20px 20px 20px;
@@ -23,7 +27,7 @@
 .red-preview-container {
     position: relative;
     min-width: 490px;
-    aspect-ratio: 3/4;
+    aspect-ratio: var(--red-note-aspect-ratio);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -38,7 +42,7 @@
 .red-image-preview {
     width: 100%;
     max-width: 450px;
-    aspect-ratio: 3/4;
+    aspect-ratio: var(--red-note-aspect-ratio);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;

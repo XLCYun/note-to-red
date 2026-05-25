@@ -1,0 +1,220 @@
+<style>
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mini-note {
+    height: 100%;
+    min-height: 300px;
+    border-radius: 8px;
+    padding: 18px 18px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border: 1px solid rgba(110, 84, 53, 0.18);
+  }
+  .mini-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #7d6245;
+    font-size: 12px;
+  }
+  .mini-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mini-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(113, 86, 57, 0.16);
+    border: 1px solid rgba(113, 86, 57, 0.18);
+  }
+  .mini-user-meta strong,
+  .mini-title,
+  .mini-kicker {
+    font-family: "Georgia", "Noto Serif SC", serif;
+  }
+  .mini-user-meta strong {
+    display: block;
+    font-size: 13px;
+    color: #5f4731;
+  }
+  .mini-user-meta span {
+    font-size: 11px;
+    color: #927559;
+  }
+  .mini-kicker {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9a7858;
+  }
+  .mini-title {
+    font-size: 23px;
+    line-height: 1.28;
+    color: #4e3928;
+    margin: 0;
+  }
+  .mini-line {
+    height: 1px;
+    background: rgba(113, 86, 57, 0.18);
+  }
+  .mini-p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #694f39;
+  }
+  .mini-p strong {
+    color: #8a5f34;
+  }
+  .mini-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #694f39;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+  .mini-quote {
+    padding-left: 12px;
+    border-left: 2px solid rgba(138, 95, 52, 0.42);
+    color: #7d6245;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .paper-a {
+    background: #f7f1e3;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.34);
+  }
+  .paper-b {
+    background: linear-gradient(180deg, #f8f1e2 0%, #f4ecdc 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+  }
+  .paper-c {
+    background: #f6efe1;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
+  }
+  .variant-b .mini-title {
+    font-size: 24px;
+  }
+  .variant-b .mini-line {
+    height: 2px;
+    background: rgba(129, 95, 63, 0.38);
+  }
+  .variant-c .mini-title {
+    font-size: 21px;
+  }
+  .variant-c .mini-note {
+    border-style: dashed;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #6b5239;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(110,84,53,0.16);
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<h2>黄皮底复古杂志主题方向</h2>
+<p class="subtitle">三种都遵循你选的路线: 浅黄米白底, 暖棕字色, 以配色气质为主, 杂志感只留一层薄薄的存在感。</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="badge">推荐方向</div>
+      <div class="mini-note paper-a">
+        <div class="mini-header">
+          <div class="mini-user">
+            <div class="mini-avatar"></div>
+            <div class="mini-user-meta">
+              <strong>夜半编辑部</strong>
+              <span>@yb-note</span>
+            </div>
+          </div>
+          <span>2026/05/25</span>
+        </div>
+        <div class="mini-kicker">Feature Story</div>
+        <h3 class="mini-title">旧纸色调, 但页面依然很轻</h3>
+        <div class="mini-line"></div>
+        <div class="mini-p">标题和强调文字用 <strong>深棕与焦糖色</strong> 拉开层次, 背景只轻轻发黄。</div>
+        <ul class="mini-list">
+          <li>最耐看, 日常使用压力小</li>
+          <li>复古感明确, 但不脏不重</li>
+        </ul>
+        <div class="mini-quote">像保存得很好的旧刊内页, 温和、安静、长期看也不累。</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. 纸感轻复古</h3>
+      <p>最接近你的选择。重点放在纸色和暖棕配色，排版只做克制的细线和衬线标题。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image variant-b">
+      <div class="mini-note paper-b">
+        <div class="mini-header">
+          <div class="mini-user">
+            <div class="mini-avatar"></div>
+            <div class="mini-user-meta">
+              <strong>夜半编辑部</strong>
+              <span>@yb-note</span>
+            </div>
+          </div>
+          <span>2026/05/25</span>
+        </div>
+        <div class="mini-kicker">Special Issue</div>
+        <h3 class="mini-title">同样浅黄, 但更像刊物排版</h3>
+        <div class="mini-line"></div>
+        <div class="mini-p">保留浅黄底, 但把分隔线、标题层次、引用框再做重一点。</div>
+        <ul class="mini-list">
+          <li>杂志味更明显</li>
+          <li>视觉存在感更高</li>
+        </ul>
+        <div class="mini-quote">更有“专题页”气质，但会比 A 更抢内容一点。</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. 刊物层次感</h3>
+      <p>仍然干净，但标题、分隔线、引用会更明显，整体更像编辑排版页。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image variant-c">
+      <div class="mini-note paper-c">
+        <div class="mini-header">
+          <div class="mini-user">
+            <div class="mini-avatar"></div>
+            <div class="mini-user-meta">
+              <strong>夜半编辑部</strong>
+              <span>@yb-note</span>
+            </div>
+          </div>
+          <span>2026/05/25</span>
+        </div>
+        <div class="mini-kicker">Notes</div>
+        <h3 class="mini-title">更柔和, 更像纸张便笺</h3>
+        <div class="mini-line"></div>
+        <div class="mini-p">同样是黄皮底，但减少杂志味，换成更柔和的便笺和手稿气质。</div>
+        <ul class="mini-list">
+          <li>很温和</li>
+          <li>“杂志”识别度最弱</li>
+        </ul>
+        <div class="mini-quote">适合想要暖色主题，但不太想被风格打扰的人。</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C. 纸页便笺感</h3>
+      <p>更偏纸张与手稿，而不是杂志。安全，但和你的目标有一点点偏离。</p>
+    </div>
+  </div>
+</div>

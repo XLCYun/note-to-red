@@ -1,0 +1,75 @@
+{
+    "id": "vintage-magazine",
+    "name": "旧刊米黄",
+    "description": "浅黄米白纸张与暖棕衬线字的轻复古杂志主题",
+    "fonts": {
+        "body": "Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif",
+        "heading": "Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif",
+        "table": "Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif"
+    },
+    "styles": {
+        "imagePreview": "background-color: #f7f1e3; padding: 32px 28px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.42);",
+        "header": {
+            "avatar": {
+                "container": "width: 42px; height: 42px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(110,84,53,0.16); box-shadow: 0 4px 10px rgba(110,84,53,0.08);",
+                "placeholder": "background: linear-gradient(135deg, #f9f4e7, #efe4cf); transition: all 0.3s ease;",
+                "image": "object-fit: cover; transition: transform 0.3s ease; filter: saturate(0.96) contrast(1.02);"
+            },
+            "nameContainer": "display: flex; align-items: center; gap: 8px;",
+            "userName": "font-size: 17px; font-weight: 600; color: #5a4230; font-family: Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif;",
+            "userId": "font-size: 14px; color: #927559; font-family: Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif;",
+            "postTime": "font-size: 13px; color: #9a7f63; font-family: Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif;",
+            "verifiedIcon": "width: 20px; height: 20px; margin-left: -5px; fill: #c39155;"
+        },
+        "footer": {
+            "container": "position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 14px; padding: 16px; color: #8f7458; font-size: 13px; border-top: 1px solid rgba(110,84,53,0.18); background: rgba(247,241,227,0.96);",
+            "text": "color: inherit; white-space: nowrap; font-family: Georgia, \"Noto Serif SC\", \"Songti SC\", \"STSong\", SimSun, serif;",
+            "separator": "color: rgba(110,84,53,0.42);"
+        },
+        "title": {
+            "h2": {
+                "base": "margin: 6px 0 0; font-size: 1.58em; letter-spacing: 0; line-height: 1.45;",
+                "content": "font-weight: 700; color: #4e3928;",
+                "after": ""
+            },
+            "h3": {
+                "base": "margin: 24px 0 0; font-size: 1.28em; letter-spacing: 0; line-height: 1.5;",
+                "content": "font-weight: 700; color: #5a4230;",
+                "after": ""
+            },
+            "base": {
+                "base": "margin: 20px 0 0; font-size: 1.12em; letter-spacing: 0; line-height: 1.5;",
+                "content": "font-weight: 700; color: #654b37;",
+                "after": ""
+            }
+        },
+        "paragraph": "line-height: 1.86; margin-bottom: 1.1em; font-size: 15px; color: #5f4731;",
+        "emphasis": {
+            "strong": "font-weight: 700; color: #8a5f34;",
+            "em": "font-style: normal; color: #7f613f; background: rgba(138,95,52,0.08); padding: 0 4px;",
+            "del": "text-decoration: line-through; color: #8d755f;"
+        },
+        "list": {
+            "container": "padding-left: 26px; margin-bottom: 1.15em; color: #654b37;",
+            "item": "margin-bottom: 0.75em; font-size: 15px; color: #654b37; line-height: 1.82;",
+            "taskList": "list-style: none; margin-left: -22px; font-size: 15px; color: #654b37; line-height: 1.82;"
+        },
+        "code": {
+            "block": "background: #fbf6ec; padding: 1.1em 1.2em; border-radius: 10px; font-size: 14px; font-family: SF Mono, Menlo, monospace; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; color: #5e4630; margin: 1.3em 0; border: 1px solid rgba(110,84,53,0.16);",
+            "inline": "background: #fbf6ec; padding: 3px 8px; border-radius: 5px; color: #795437; font-size: 14px; font-family: SF Mono, Menlo, monospace; border: 1px solid rgba(110,84,53,0.12);"
+        },
+        "quote": "border-left: 3px solid rgba(138,95,52,0.48); padding: 2px 0 2px 18px; margin: 1.25em 0; color: #6a5039; font-style: normal; font-size: 15px; line-height: 1.82; background: linear-gradient(to right, rgba(138,95,52,0.07), rgba(138,95,52,0));",
+        "image": "max-width: 100%; height: auto; margin: 1.4em auto; border-radius: 10px; border: 1px solid rgba(110,84,53,0.14);",
+        "link": "color: #8a5f34; text-decoration: underline; text-decoration-color: rgba(138,95,52,0.35); text-underline-offset: 3px; transition: opacity 0.2s ease;",
+        "table": {
+            "container": "width: 100%; margin: 1.35em 0; border-collapse: separate; border-spacing: 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(110,84,53,0.18); background: rgba(255,255,255,0.26);",
+            "header": "background: #f2e8d6; font-weight: 700; color: #5a4230; padding: 12px; border-bottom: 1px solid rgba(110,84,53,0.18);",
+            "cell": "padding: 12px; color: #5f4731; border-top: 1px solid rgba(110,84,53,0.14);"
+        },
+        "hr": "border: none; border-top: 1px solid rgba(110,84,53,0.24); margin: 28px 0;",
+        "footnote": {
+            "ref": "color: #927559; text-decoration: none; font-size: 0.9em;",
+            "backref": "color: #927559; text-decoration: none; font-size: 0.9em;"
+        }
+    }
+}

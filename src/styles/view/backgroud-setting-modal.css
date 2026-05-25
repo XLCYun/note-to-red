@@ -16,7 +16,7 @@
 
 .red-background-preview {
     width: 350px;
-    aspect-ratio: 3/4;
+    aspect-ratio: var(--red-note-aspect-ratio);
     border: 1px solid var(--background-modifier-border);
     margin: 0 auto 16px;
     overflow: hidden;
@@ -56,7 +56,7 @@
 
 .red-bg-thumb {
     width: 46px;
-    aspect-ratio: 3/4;
+    aspect-ratio: var(--red-note-aspect-ratio);
     object-fit: cover;
     border-radius: 6px;
     border: 2px solid var(--background-modifier-border);

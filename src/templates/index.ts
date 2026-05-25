@@ -10,6 +10,7 @@ const sakuraTemplate = require('./sakura.json');
 const starryTemplate = require('./starry.json');
 const metalTemplate = require('./metal.json');
 const yuelingTemplate = require('./yueling.json');
+const vintageMagazineTemplate = require('./vintage-magazine.json');
 
 export const templates = {
     default: defaultTemplate,
@@ -22,5 +23,6 @@ export const templates = {
     sakura: sakuraTemplate,
     starry: starryTemplate,
     metal: metalTemplate,
-    yueling: yuelingTemplate
+    yueling: yuelingTemplate,
+    vintageMagazine: vintageMagazineTemplate
 };

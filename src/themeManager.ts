@@ -7,6 +7,11 @@ export interface Theme {
     description: string;
     isPreset?: boolean;  // 添加预设主题标识
     isVisible?: boolean; // 控制主题是否显示
+    fonts?: {
+        body?: string;
+        heading?: string;
+        table?: string;
+    };
     styles: {
         // 容器基础样式
         imagePreview: string;
@@ -106,7 +111,12 @@ export class ThemeManager {
 
     // 修改 applyTheme 方法
     public applyTheme(element: HTMLElement, theme?: Theme): void {
-        const styles = theme ? theme.styles : this.currentTheme.styles; // 修改为从参数 theme 获取样式
+        const activeTheme = theme ?? this.currentTheme;
+        const styles = activeTheme.styles;
+        const headingFont = activeTheme.fonts?.heading ?? this.currentFont;
+        const bodyFont = activeTheme.fonts?.body ?? this.currentFont;
+        const tableFont = activeTheme.fonts?.table ?? bodyFont;
+
         // 修改应用基础样式的方式
         const imagePreview = element.querySelector('.red-image-preview') as HTMLElement;
         if (imagePreview) {
@@ -201,7 +211,7 @@ export class ThemeManager {
                 const titleStyle = styles.title[styleKey];
 
                 // 应用样式
-                el.setAttribute('style', `${titleStyle.base}; font-family: ${this.currentFont};`);
+                el.setAttribute('style', `${titleStyle.base}; font-family: ${headingFont};`);
                 el.querySelector('.content')?.setAttribute('style', titleStyle.content);
                 el.querySelector('.after')?.setAttribute('style', titleStyle.after);
             });
@@ -210,7 +220,7 @@ export class ThemeManager {
         // 应用段落样式
         element.querySelectorAll('p').forEach(el => {
             if (!el.parentElement?.closest('p') && !el.parentElement?.closest('blockquote')) {
-                el.setAttribute('style', `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+                el.setAttribute('style', `${styles.paragraph}; font-family: ${bodyFont}; font-size: ${this.currentFontSize}px;`);
             }
         });
 
@@ -219,15 +229,15 @@ export class ThemeManager {
             el.setAttribute('style', styles.list.container);
         });
         element.querySelectorAll('li').forEach(el => {
-            el.setAttribute('style', `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', `${styles.list.item}; font-family: ${bodyFont}; font-size: ${this.currentFontSize}px;`);
         });
         element.querySelectorAll('.task-list-item').forEach(el => {
-            el.setAttribute('style', `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', `${styles.list.taskList}; font-family: ${bodyFont}; font-size: ${this.currentFontSize}px;`);
         });
 
         // 应用引用样式
         element.querySelectorAll('blockquote').forEach(el => {
-            el.setAttribute('style', `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', `${styles.quote}; font-family: ${bodyFont}; font-size: ${this.currentFontSize}px;`);
         });
 
         // 应用代码样式
@@ -259,10 +269,10 @@ export class ThemeManager {
             el.setAttribute('style', styles.table.container);
         });
         element.querySelectorAll('th').forEach(el => {
-            el.setAttribute('style', `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', `${styles.table.header}; font-family: ${tableFont}; font-size: ${this.currentFontSize}px;`);
         });
         element.querySelectorAll('td').forEach(el => {
-            el.setAttribute('style', `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', `${styles.table.cell}; font-family: ${tableFont}; font-size: ${this.currentFontSize}px;`);
         });
 
         // 应用分割线样式
