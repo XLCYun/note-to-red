@@ -187,7 +187,7 @@ export class ThemeManager {
         }
 
         // 应用标题样式
-        ['h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
+        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
             element.querySelectorAll(tag).forEach(el => {
                 // 检查是否已经处理过
                 if (!el.querySelector('.content')) {
@@ -208,7 +208,7 @@ export class ThemeManager {
 
                 // 根据标签选择对应的样式
                 const styleKey = (tag === 'h4' || tag === 'h5' || tag === 'h6' ? 'base' : tag) as keyof typeof styles.title;
-                const titleStyle = styles.title[styleKey];
+                const titleStyle = styles.title[styleKey] ?? styles.title.base;
 
                 // 应用样式
                 el.setAttribute('style', `${titleStyle.base}; font-family: ${headingFont};`);

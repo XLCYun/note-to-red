@@ -11,24 +11,21 @@ export class RedConverter {
     }
 
     static hasValidContent(element: HTMLElement): boolean {
-        const settings = this.plugin?.settingsManager?.getSettings();
-        const headingLevel = settings?.headingLevel || 'h1';
-        const headers = element.querySelectorAll(headingLevel);
-        return headers.length > 0;
+        const mainTitle = element.querySelector('h1');
+        return Boolean(mainTitle);
     }
 
     static formatContent(element: HTMLElement): void {
-        const settings = this.plugin?.settingsManager?.getSettings();
-        const headingLevel = settings?.headingLevel || 'h1';
-        const headers = Array.from(element.querySelectorAll(headingLevel));
-        
-        if (headers.length === 0) {
+        const mainTitle = element.querySelector('h1');
+
+        if (!mainTitle) {
             element.empty();
-            const tip = element.createEl('div', {
+            element.createEl('div', {
                 cls: 'red-empty-message',
                 text: `⚠️ 温馨提示
-                        请使用${headingLevel === 'h1' ? '一级标题(#)' : '二级标题(##)'}来分割内容
-                        每个${headingLevel === 'h1' ? '一级标题' : '二级标题'}将生成一张独立的图片
+                        请先添加一级标题(#)作为主标题
+                        文档内容会按 --- 分割为多页
+                        二级标题(##)会作为正文内容正常显示
                         现在编辑文档，实时预览效果`
             });
             // 触发自定义事件
@@ -76,14 +73,9 @@ export class RedConverter {
         // 创建内容容器
         const contentContainer = document.createElement('div');
         contentContainer.className = 'red-content-container';
-        
-        // 处理每个二级标题及其内容
-        headers.forEach((header, index) => {
-            const section = this.createContentSection(header, index);
-            if (section) {
-                contentContainer.appendChild(section);
-            }
-        });
+
+        const sections = this.createContentSections(mainTitle);
+        sections.forEach(section => contentContainer.appendChild(section));
 
         // 组装结构
         contentArea.appendChild(contentContainer);
@@ -104,82 +96,49 @@ export class RedConverter {
         element.dispatchEvent(copyEvent);
     }
 
-        private static createContentSection(header: Element, index: number): HTMLElement | null {
-        const settings = this.plugin?.settingsManager?.getSettings();
-        const headingLevel = settings?.headingLevel || 'h1';
-        
-        // 获取当前标题到下一个标题之间的所有内容
-        let content: Element[] = [];
-        let current = header.nextElementSibling;
-        
-        while (current && current.tagName !== headingLevel.toUpperCase()) {
+    private static createContentSections(mainTitle: Element): HTMLElement[] {
+        const content: Element[] = [];
+        let current = mainTitle.nextElementSibling;
+
+        while (current) {
             content.push(current.cloneNode(true) as Element);
             current = current.nextElementSibling;
         }
 
-        // 检查内容中是否有水平分割线
         const pages: Element[][] = [[]];
-        let currentPage = 0;
-        
+        let currentPageIndex = 0;
+
         content.forEach((el: Element) => {
-            // 检查是否为水平分割线
             if (el.tagName === 'HR') {
-                // 创建新页面
-                currentPage++;
-                pages[currentPage] = [];
+                currentPageIndex++;
+                pages[currentPageIndex] = [];
             } else {
-                // 如果当前页面数组不存在，创建一个
-                if (!pages[currentPage]) {
-                    pages[currentPage] = [];
+                if (!pages[currentPageIndex]) {
+                    pages[currentPageIndex] = [];
                 }
-                // 添加元素到当前页面
-                pages[currentPage].push(el);
+                pages[currentPageIndex].push(el);
             }
         });
-        
-        // 如果只有一个页面，按原来的方式处理
-        if (pages.length === 1 && !content.some(el => el.tagName === 'HR')) {
-            // 创建内容区域
+
+        const nonEmptyPages = pages.filter(page => page.length > 0);
+        if (nonEmptyPages.length === 0) {
+            nonEmptyPages.push([]);
+        }
+
+        return nonEmptyPages.map((pageContent, index) => {
             const section = document.createElement('section');
             section.className = 'red-content-section';
             section.setAttribute('data-index', index.toString());
-            
-            // 添加标题
-            section.appendChild(header.cloneNode(true));
-            
-            // 添加内容
-            content.forEach(el => section.appendChild(el));
-            
-            // 处理样式和格式
+
+            if (index === 0) {
+                section.appendChild(mainTitle.cloneNode(true));
+            }
+
+            pageContent.forEach(el => section.appendChild(el));
+
             this.processElements(section);
-            
             return section;
-        } else {
-            // 创建一个包含多个页面的片段
-            const fragment = document.createDocumentFragment();
-            
-            // 为每个页面创建一个部分
-            pages.forEach((pageContent, pageIndex) => {
-                if (pageContent.length === 0) return; // 跳过空页面
-                
-                const section = document.createElement('section');
-                section.className = 'red-content-section';
-                section.setAttribute('data-index', `${index}-${pageIndex}`);
-                
-                // 每个页面都添加标题
-                section.appendChild(header.cloneNode(true));
-                
-                // 添加页面内容
-                pageContent.forEach(el => section.appendChild(el));
-                
-                // 处理样式和格式
-                this.processElements(section);
-                
-                fragment.appendChild(section);
-            });
-            
-            return fragment as unknown as HTMLElement;
-        }
+        });
     }
 
     private static processElements(container: HTMLElement | null): void {

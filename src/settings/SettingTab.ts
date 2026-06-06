@@ -75,21 +75,10 @@ export class RedSettingTab extends PluginSettingTab {
             setIcon(typographyToggle, isExpanded ? 'chevron-down' : 'chevron-right');
         });
 
-        // 内容分割标题级别设置
+        // 内容结构说明
         new Setting(typographyContent)
-            .setName('内容分割标题级别')
-            .setDesc('选择用于分割内容生成图片的标题级别：')
-            .addDropdown(dropdown => dropdown
-                .addOption('h1', '一级标题(#) - 按大章节分割')
-                .addOption('h2', '二级标题(##) - 按小章节分割')
-                .setValue(this.plugin.settingsManager.getSettings().headingLevel)
-                .onChange(async (value: 'h1' | 'h2') => {
-                    await this.plugin.settingsManager.updateSettings({
-                        headingLevel: value
-                    });
-                    new Notice('标题级别设置已更新，请重启 Obsidian 或重新加载以使更改生效');
-                })
-            );
+            .setName('内容结构规则')
+            .setDesc('固定使用一级标题(#)作为主标题，只显示在第一页顶部；使用 --- 分页；二级标题(##)作为正文正常显示。');
 
         // 字体管理区域
         const fontSection = containerEl.createDiv('red-settings-subsection');
