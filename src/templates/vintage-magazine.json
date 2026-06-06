@@ -27,6 +27,11 @@
             "separator": "color: rgba(110,84,53,0.42);"
         },
         "title": {
+            "h1": {
+                "base": "margin: 0 0 10px; font-size: 1.96em; letter-spacing: 0; line-height: 1.32; text-align: left;",
+                "content": "font-weight: 700; color: #4a3525;",
+                "after": ""
+            },
             "h2": {
                 "base": "margin: 6px 0 0; font-size: 1.58em; letter-spacing: 0; line-height: 1.45;",
                 "content": "font-weight: 700; color: #4e3928;",
